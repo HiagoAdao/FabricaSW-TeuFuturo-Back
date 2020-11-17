@@ -1,4 +1,3 @@
-from .mock_turmas import TURMAS
 from teu_futuro.database import TurmaDAO
 from ..util.date import Formatos, converte_str_para_datetime
 
