@@ -8,7 +8,7 @@ turma_schema = TurmaSchema()
 TURMAS = [
     turma_schema.dump(dict(
         nome="Teu Futuro Verão 2021",
-        professores=ProfessorService().obter_todos_professores(),
+        professores=[],
         alunos=[],
         atividades=[],
         data_inicio=converte_str_para_datetime(
@@ -18,7 +18,7 @@ TURMAS = [
     )),
     turma_schema.dump(dict(
         nome="Teu Futuro Inverno 2021",
-        professores=ProfessorService().obter_todos_professores(),
+        professores=[],
         alunos=[],
         atividades=[],
         data_inicio=converte_str_para_datetime(

@@ -1,15 +1,15 @@
 from .mock_turmas import TURMAS
 from teu_futuro.database import TurmaDAO
+from ..util.date import Formatos, converte_str_para_datetime
 
 
 class TurmaService:
     def __init__(self):
         self.dao = TurmaDAO()
 
-    def obter_turmas(self):
-        turmas_banco = self.dao.obter_todos()
+    def _obtem_professores_turma(self, turmas_professores):
         turmas = []
-        for item in turmas_banco:
+        for item in turmas_professores:
             turma_existente = next(filter(
                 lambda t: t["id"] == item["turma"]["id"],
                 turmas
@@ -23,15 +23,22 @@ class TurmaService:
                 turma_existente["professores"].append(item["professor"])
         return turmas
 
+    def obter_turmas(self):
+        turmas_banco = self.dao.obter_todos()
+        turmas = self._obtem_professores_turma(turmas_banco)
+        return turmas
+
     def obter_turma(self, turma_id):
-        try:
-            return TURMAS[turma_id - 1]
-        except BaseException as err:
-            print(err)
-            return "Turma Inexistente"
+        turma_banco = self.dao.obter(turma_id)
+        turma = self._obtem_professores_turma(turma_banco)
+        return turma[0] if turma else None
 
     def criar_turma(self, dados_turma):
-        # TODO: Criar lógica de criação quando tiver
-        #  conexão com banco de dados
-        TURMAS.append(dados_turma)
-        return "Turma criada com sucesso"
+        dados_turma["data_inicio"] = converte_str_para_datetime(
+            dados_turma["data_inicio"], Formatos.BRASILEIRO.value
+        )
+        dados_turma["data_fim"] = converte_str_para_datetime(
+            dados_turma["data_fim"], Formatos.BRASILEIRO.value
+        )
+        turma_id = self.dao.salvar(dados_turma)
+        return turma_id

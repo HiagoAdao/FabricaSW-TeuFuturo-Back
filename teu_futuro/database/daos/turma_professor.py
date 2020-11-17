@@ -1,6 +1,8 @@
 from ..factory.db_injection import injetar_db
 from .base import DAOBase
 from ..models.turma_professor import TurmaProfessor
+from ..models.turma import Turma
+from ..models.professor import Professor
 
 
 class TurmaProfessorDAOException(BaseException):
@@ -13,7 +15,7 @@ class TurmaProfessorDAO(DAOBase):
     def __init__(self, instancia_db=None):
         self.db = instancia_db
         if self.db is not None:
-            self.db.bind([TurmaProfessor])
+            self.db.bind([Turma, Professor, TurmaProfessor])
 
     def obter_todos(self):
         pass

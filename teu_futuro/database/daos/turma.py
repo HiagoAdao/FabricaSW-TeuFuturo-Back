@@ -39,6 +39,25 @@ class TurmaDAO(DAOBase):
         except BaseException as e:
             raise TurmaDAOException(f"Erro em TurmaDAO.obter_todos: {e}")
 
+    def obter(self, turma_id):
+        try:
+            query = (
+                TurmaProfessor.select(
+                    Turma,
+                    Professor
+                )
+                .join(Turma,
+                      on=(Turma.id == TurmaProfessor.turma))
+                .switch(TurmaProfessor)
+                .join(Professor,
+                      on=(Professor.id ==
+                          TurmaProfessor.professor))
+                .where((Turma.id == turma_id))
+            )
+            return list(map(lambda turma: turma.to_dict(), query))
+        except BaseException as e:
+            raise TurmaDAOException(f"Erro em TurmaDAO.obter_todos: {e}")
+
     def salvar(self, dados_turma):
         with self.db.atomic() as transaction:
             try:
