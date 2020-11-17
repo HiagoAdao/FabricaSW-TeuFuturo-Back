@@ -1,21 +1,10 @@
-from ..schemas.professor import ProfessorSchema
+from teu_futuro.database import ProfessorDAO
 
 
 class ProfessorService:
     def __init__(self):
-        self.prof_schema = ProfessorSchema()
+        self.dao = ProfessorDAO()
 
-    def obter_todos_professores(self):
-        # TODO fazer conexão com o banco de dados para obtenção
-        return [
-            self.prof_schema.dump(dict(
-                nome="Fahad",
-                sobrenome="Kalil",
-                email="fahad.kalil@imed.edu.br"
-            )),
-            self.prof_schema.dump(dict(
-                nome="Marcos",
-                sobrenome="Santos",
-                email="marcos.santos@imed.edu.br"
-            ))
-        ]
+    def obter_professores(self):
+        professores = self.dao.obter_todos()
+        return professores
