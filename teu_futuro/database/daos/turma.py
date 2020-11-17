@@ -1,4 +1,5 @@
 from ..factory.db_injection import injetar_db
+from .base import DAOBase
 from ..models.turma import Turma
 from ..models.professor import Professor
 from ..models.turma_professor import TurmaProfessor
@@ -9,7 +10,7 @@ class TurmaDAOException(BaseException):
         super(TurmaDAOException, self).__init__(msg)
 
 
-class TurmaDAO:
+class TurmaDAO(DAOBase):
     @injetar_db("instancia_db")
     def __init__(self, instancia_db=None):
         self.db = instancia_db

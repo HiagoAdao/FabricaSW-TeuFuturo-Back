@@ -1,4 +1,5 @@
 from ..factory.db_injection import injetar_db
+from .base import DAOBase
 from ..models.professor import Professor
 
 
@@ -7,7 +8,7 @@ class ProfessorDAOException(BaseException):
         super(ProfessorDAOException, self).__init__(msg)
 
 
-class ProfessorDAO:
+class ProfessorDAO(DAOBase):
     @injetar_db("instancia_db")
     def __init__(self, instancia_db=None):
         self.db = instancia_db
@@ -16,7 +17,10 @@ class ProfessorDAO:
 
     def obter_todos(self):
         try:
-            results = list(map(lambda p: p.to_dict(), Professor.select()))
+            results = list(map(
+                lambda professor: professor.to_dict(),
+                Professor.select()
+            ))
             return results
         except BaseException as e:
             raise ProfessorDAOException(

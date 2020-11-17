@@ -5,7 +5,7 @@ services:
         image: mysql:latest
         command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
         volumes:
-            - ./db:/docker-entrypoint-initdb.d/
+            - ./db/scripts:/docker-entrypoint-initdb.d/
         ports: 
             - 3308:3306
         environment:

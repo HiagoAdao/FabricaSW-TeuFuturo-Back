@@ -1,4 +1,5 @@
 from ..factory.db_injection import injetar_db
+from .base import DAOBase
 from ..models.aluno import Aluno
 from ..models.escola import Escola
 from ..models.sponsor import Sponsor
@@ -10,7 +11,7 @@ class AlunoDAOException(BaseException):
         super(AlunoDAOException, self).__init__(msg)
 
 
-class AlunoDAO:
+class AlunoDAO(DAOBase):
     @injetar_db("instancia_db")
     def __init__(self, instancia_db=None):
         self.db = instancia_db
@@ -24,7 +25,10 @@ class AlunoDAO:
 
     def obter_todos(self):
         try:
-            results = list(map(lambda a: a.to_dict(), Aluno.select()))
+            results = list(map(lambda aluno: aluno.to_dict(), Aluno.select()))
             return results
         except BaseException as e:
             raise AlunoDAOException(f"Erro em AlunoDAO.obter_todos: {e}")
+
+    def salvar(self):
+        pass
