@@ -1,5 +1,4 @@
 from teu_futuro.responses import Responses
-from ..util.date import converte_str_para_datetime, Formatos
 from ..services.turma import TurmaService
 from ..services.turma_professor import TurmaProfessorService
 from ..schemas.turma import TurmaSchema
