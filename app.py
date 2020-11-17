@@ -4,23 +4,11 @@ from teu_futuro import (
     ProfessorController,
     AlunoController,
     AtividadeController,
-    DominiosController,
-    AlunoDAO
+    DominiosController
 )
 from config import ConfigurationManager
 
 app = ConfigurationManager.inicializar()
-
-
-@app.route("/teste")
-def get_teste():
-    from flask import jsonify, make_response
-    dao = AlunoDAO()
-    response = dao.obter_todos()
-    return make_response(
-        jsonify(dict(status='success', data=response)),
-        200
-    )
 
 
 # =============== GETs ===============
