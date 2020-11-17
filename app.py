@@ -4,6 +4,7 @@ from teu_futuro import (
     ProfessorController,
     AlunoController,
     AtividadeController,
+    DominiosController,
     AlunoDAO
 )
 from config import ConfigurationManager
@@ -36,6 +37,11 @@ def get_turma(turma_id):
 @app.route("/professores")
 def get_all_professores():
     return ProfessorController.obter_todos_professores()
+
+
+@app.route("/escolas")
+def get_all_escolas():
+    return DominiosController.obter_todas_escolas()
 
 
 @app.route("/turma/<int:turma_id>/alunos")
