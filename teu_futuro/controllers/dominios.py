@@ -6,7 +6,6 @@ from teu_futuro.services.dominios import DominiosService
 
 
 class DominiosController:
-
     @staticmethod
     def obter_todas_escolas():
         dominios_service = DominiosService()
