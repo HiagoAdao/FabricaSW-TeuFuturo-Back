@@ -44,6 +44,16 @@ def get_all_escolas():
     return DominiosController.obter_todas_escolas()
 
 
+@app.route("/sponsors")
+def get_all_sponsors():
+    return DominiosController.obter_todos_sponsors()
+
+
+@app.route("/anos-ensino-medio")
+def get_all_anos_ensino_medio():
+    return DominiosController.obter_todos_anos_ensino_medio()
+
+
 @app.route("/turma/<int:turma_id>/alunos")
 def get_all_alunos(turma_id):
     return AlunoController.obter_todos_alunos(turma_id)
