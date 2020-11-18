@@ -1,30 +1,31 @@
+from teu_futuro.database import AlunoDAO
+
+
 class AlunoService:
+    def __init__(self):
+        self.dao = AlunoDAO()
+
     def obter_alunos_por_turma(self, turma_id):
-        # TODO fazer integração com o banco de dados para obtenção
-        # Implementar lógica de inativação (GET em ALUNO)
-        # quando tiver banco de dados
-        # return TURMAS[turma_id - 1]["alunos"]
-        return "Integração com banco de dados a ser criada"
+        alunos = self.dao.obter_todos(turma_id)
+        return alunos
 
     def cadastrar_aluno_na_turma(self, turma_id, dados_aluno):
-        # TODO: Criar lógica de criação quando tiver
-        #  conexão com banco de dados
-        # dados_aluno["inativo"] = False
-        # TURMAS[turma_id - 1]["alunos"].append(dados_aluno)
-        # return (
-        #     f"Aluno cadastrado na turma "
-        #     f"'{TURMAS[turma_id - 1]['nome']}' com sucesso"
-        # )
-        return "Integração com banco de dados a ser criada"
+        dados_aluno["turma"] = turma_id
+        dados_aluno["escola"] = dados_aluno["escola"]["id"]
+        dados_aluno["ano_ensino_medio"] = \
+            dados_aluno["ano_ensino_medio"]["id"]
+        dados_aluno["sponsor"] = \
+            dados_aluno["sponsor"]["id"]
 
-    def inativar_aluno(self, turma_id, aluno_id):
-        # TODO fazer integração com o banco de dados para inativação
-        # Implementar lógica de inativação (UPDATE em ALUNO)
-        # quando tiver banco de dados
-        # aluno = TURMAS[turma_id - 1]["alunos"][aluno_id - 1]
-        # aluno["inativo"] = True
-        # return (
-        #     f"Aluno '{aluno['nome']} {aluno['sobrenome']}' da turma "
-        #     f"'{TURMAS[turma_id - 1]['nome']}' inativado com sucesso"
-        # )
-        return "Integração com banco de dados a ser criada"
+        novo_aluno = self.dao.salvar(dados_aluno)
+        return (
+            f"{novo_aluno['nome']} {novo_aluno['sobrenome']} "
+            f"adicionado na turma {turma_id} com sucesso"
+        )
+
+    def inativar_aluno(self, aluno_id):
+        aluno = self.dao.inativar(aluno_id)
+        return (
+            f"{aluno['nome']} {aluno['sobrenome']} "
+            "inativado com sucesso"
+        )

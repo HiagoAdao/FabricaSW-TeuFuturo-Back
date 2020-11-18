@@ -54,9 +54,9 @@ def get_all_atividades(turma_id):
 
 # =============== PUTs ===============
 @app.route(
-    "/turma/<int:turma_id>/aluno/<int:aluno_id>/inativar", methods=["PUT"])
-def put_inativar_aluno(turma_id, aluno_id):
-    return AlunoController.inativar_aluno(turma_id, aluno_id)
+    "/aluno/<int:aluno_id>/inativar", methods=["PUT"])
+def put_inativar_aluno(aluno_id):
+    return AlunoController.inativar_aluno(aluno_id)
 
 
 # =============== POSTs ===============

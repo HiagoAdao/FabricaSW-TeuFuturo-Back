@@ -56,7 +56,7 @@ class TurmaDAO(DAOBase):
             )
             return list(map(lambda turma: turma.to_dict(), query))
         except BaseException as e:
-            raise TurmaDAOException(f"Erro em TurmaDAO.obter_todos: {e}")
+            raise TurmaDAOException(f"Erro em TurmaDAO.obter: {e}")
 
     def salvar(self, dados_turma):
         with self.db.atomic() as transaction:

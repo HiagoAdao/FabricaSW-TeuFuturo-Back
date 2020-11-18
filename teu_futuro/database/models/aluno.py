@@ -13,7 +13,7 @@ class Aluno(Model):
     nome = TextField(column_name="NOME")
     sobrenome = TextField(column_name="SOBRENOME")
     email = TextField(column_name="EMAIL")
-    inativo = BooleanField(column_name="INATIVO")
+    inativo = BooleanField(column_name="INATIVO", default=False)
     sponsor = ForeignKeyField(
         Sponsor,
         column_name="SPONSOR_ID",
@@ -44,8 +44,7 @@ class Aluno(Model):
             inativo=self.inativo,
             sponsor=self.sponsor.to_dict(),
             escola=self.escola.to_dict(),
-            ano_ensino_medio=self.ano_ensino_medio.to_dict(),
-            turma=self.turma.to_dict()
+            ano_ensino_medio=self.ano_ensino_medio.to_dict()
         )
 
     @staticmethod
