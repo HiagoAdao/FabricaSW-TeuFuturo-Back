@@ -75,5 +75,15 @@ def post_atividade_turma(turma_id):
     return AtividadeController.cadastrar_atividade(turma_id, request.json)
 
 
+@app.route(
+    "/aluno/<int:aluno_id>/atividade/<int:atividade_id>", methods=["POST"])
+def post_atividade_aluno(aluno_id, atividade_id):
+    return AtividadeController.salvar_atividade_aluno(
+        aluno_id,
+        atividade_id,
+        request.json
+    )
+
+
 if __name__ == "__main__":
     app.run(port=5000)

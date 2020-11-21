@@ -1,7 +1,9 @@
 from ..factory.db_injection import injetar_db
 from .base import DAOBase
-from ..models.atividade import Atividade
 from ..models.turma import Turma
+from ..models.aluno import Aluno
+from ..models.atividade import Atividade
+from ..models.atividade_aluno import AtividadeAluno
 
 
 class AtividadeDAOException(BaseException):
@@ -15,8 +17,10 @@ class AtividadeDAO(DAOBase):
         self.db = instancia_db
         if self.db is not None:
             self.db.bind([
+                Turma,
                 Atividade,
-                Turma
+                Aluno,
+                AtividadeAluno
             ])
 
     def obter_todos(self, turma_id):
@@ -33,7 +37,8 @@ class AtividadeDAO(DAOBase):
             ))
             return results
         except BaseException as e:
-            raise AtividadeDAOException(f"Erro em AtividadeDAO.obter_todos: {e}")
+            raise AtividadeDAOException(
+                f"Erro em AtividadeDAO.obter_todos: {e}")
 
     def salvar(self, dados_atividade):
         with self.db.atomic() as transaction:
@@ -47,4 +52,19 @@ class AtividadeDAO(DAOBase):
             except BaseException as e:
                 if transaction is not None:
                     transaction.rollback()
-                raise AtividadeDAOException(f"Erro em AtividadeDAO.salvar: {e}")
+                raise AtividadeDAOException(
+                    f"Erro em AtividadeDAO.salvar: {e}")
+
+    def salvar_atividade_aluno(self, dados_atividade_aluno):
+        with self.db.atomic() as transaction:
+            try:
+                atividade_aluno = AtividadeAluno.from_dict(
+                    dados_atividade_aluno)
+                atividade_aluno.save()
+
+                transaction.commit()
+            except BaseException as e:
+                if transaction is not None:
+                    transaction.rollback()
+                raise AtividadeDAOException(
+                    f"Erro em AtividadeDAO.salvar_atividade_aluno: {e}")

@@ -15,11 +15,7 @@ class AtividadeAluno(Model):
     resolucao = TextField(column_name="RESOLUCAO")
 
     def to_dict(self):
-        return dict(
-            aluno=self.aluno.to_dict(),
-            atividade=self.atividade.to_dict(),
-            resolucao=self.resolucao
-        )
+        return dict(resolucao=self.resolucao)
 
     @staticmethod
     def from_dict(item_dict: dict):
