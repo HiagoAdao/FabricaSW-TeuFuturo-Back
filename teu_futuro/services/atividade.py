@@ -1,17 +1,18 @@
+from teu_futuro.database import AtividadeDAO
+
+
 class AtividadeService:
+    def __init__(self):
+        self.dao = AtividadeDAO()
+
     def obter_atividade_por_turma(self, turma_id):
-        # TODO fazer integração com o banco de dados para obtenção
-        # Implementar lógica de inativação (GET em ALUNO)
-        # quando tiver banco de dados
-        # return TURMAS[turma_id - 1]["atividades"]
-        return "Integração com banco de dados a ser criada"
+        atividades = self.dao.obter_todos(turma_id)
+        return atividades
 
     def cadastrar_atividade_na_turma(self, turma_id, dados_atividade):
-        # TODO: Criar lógica de criação quando tiver
-        #  conexão com banco de dados
-        # TURMAS[turma_id - 1]["atividades"].append(dados_atividade)
-        # return (
-        #     "Atividade cadastrada na turma "
-        #     f"'{TURMAS[turma_id - 1]['nome']}' com sucesso"
-        # )
-        return "Integração com banco de dados a ser criada"
+        dados_atividade["turma"] = turma_id
+        nova_atividade = self.dao.salvar(dados_atividade)
+        return (
+            f"Atividade '{nova_atividade['nome']}' "
+            f"adicionada na turma {turma_id} com sucesso"
+        )

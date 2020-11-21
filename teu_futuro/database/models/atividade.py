@@ -18,8 +18,7 @@ class Atividade(Model):
             id=self.id,
             nome=self.nome,
             descricao=self.descricao,
-            peso=self.peso,
-            turma=self.turma.to_dict()
+            peso=self.peso
         )
 
     @staticmethod
