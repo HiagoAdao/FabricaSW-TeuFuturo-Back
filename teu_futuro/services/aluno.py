@@ -24,8 +24,5 @@ class AlunoService:
         )
 
     def inativar_aluno(self, aluno_id):
-        aluno = self.dao.inativar(aluno_id)
-        return (
-            f"Aluno '{aluno['nome']} {aluno['sobrenome']}' "
-            "inativado com sucesso"
-        )
+        self.dao.inativar(aluno_id)
+        return f"Aluno '{aluno_id}' inativado com sucesso"

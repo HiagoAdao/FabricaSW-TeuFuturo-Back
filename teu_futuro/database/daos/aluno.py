@@ -55,13 +55,14 @@ class AlunoDAO(DAOBase):
     def inativar(self, aluno_id):
         with self.db.atomic() as transaction:
             try:
-                aluno = Aluno.get(Aluno.id == aluno_id)
-                aluno.inativo = True
-                aluno.save()
+                query = (
+                    Aluno
+                    .update(inativo=True)
+                    .where((Aluno.id == aluno_id))
+                )
+                query.execute()
 
                 transaction.commit()
-
-                return aluno.to_dict()
             except BaseException as e:
                 if transaction is not None:
                     transaction.rollback()
