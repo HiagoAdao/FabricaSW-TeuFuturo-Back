@@ -71,3 +71,19 @@ class TurmaDAO(DAOBase):
                 if transaction is not None:
                     transaction.rollback()
                 raise TurmaDAOException(f"Erro em TurmaDAO.salvar: {e}")
+
+    def salvar_professor_na_turma(self, dados_turma_professor):
+        with self.db.atomic() as transaction:
+            try:
+                turma_professor = TurmaProfessor.from_dict(
+                    dados_turma_professor)
+                turma_professor.save()
+
+                transaction.commit()
+
+                return turma_professor
+            except BaseException as e:
+                if transaction is not None:
+                    transaction.rollback()
+                raise TurmaDAOException(
+                    f"Erro em TurmaDAO.salvar: {e}")

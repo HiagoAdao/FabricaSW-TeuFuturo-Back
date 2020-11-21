@@ -44,6 +44,6 @@ class TurmaService:
 
     def adicionar_professores_na_turma(self, turma_id, dados_professores):
         for professor in dados_professores:
-            self.dao.salvar(
+            self.dao.salvar_professor_na_turma(
                 dict(turma=turma_id, professor=professor["id"])
             )
