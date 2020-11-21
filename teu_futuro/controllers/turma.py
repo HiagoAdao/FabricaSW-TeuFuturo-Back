@@ -1,6 +1,5 @@
 from teu_futuro.responses import Responses
 from ..services.turma import TurmaService
-from ..services.turma_professor import TurmaProfessorService
 from ..schemas.turma import TurmaSchema
 
 
@@ -23,14 +22,13 @@ class TurmaController:
     @staticmethod
     def criar_turma(request_body):
         turma_service, turma_schema = TurmaService(), TurmaSchema()
-        turma_professor_service = TurmaProfessorService()
         try:
             dados_turma = turma_schema.dump(request_body)
 
             turma_id = turma_service.criar_turma(dados_turma)
-            resp = turma_professor_service.salvar_relacionamento(
+            turma_service.adicionar_professores_na_turma(
                 turma_id, dados_turma["professores"])
 
-            return Responses.created(resp)
+            return Responses.created(f"Turma {turma_id} criada com sucesso")
         except BaseException as err:
             return Responses.bad_request(err)
