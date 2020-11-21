@@ -4,7 +4,8 @@ from teu_futuro import (
     ProfessorController,
     AlunoController,
     AtividadeController,
-    DominiosController
+    DominiosController,
+    RankingGamificacaoController
 )
 from config import ConfigurationManager
 
@@ -83,6 +84,20 @@ def post_atividade_aluno(aluno_id, atividade_id):
         atividade_id,
         request.json
     )
+
+
+@app.route(
+    "/turma/<int:turma_id>/ranking-gamificacao", methods=["GET", "POST"])
+def ranking_gamificacao_route(turma_id):
+    request_methods_actions = {
+        "GET": lambda turma_id: RankingGamificacaoController.obter_ranking(
+            turma_id,
+            request.args.get("aluno_id")
+        ),
+        "POST": lambda turma_id: 
+            RankingGamificacaoController.atualizar_ranking(turma_id)
+    }
+    return request_methods_actions[request.method](turma_id)
 
 
 if __name__ == "__main__":

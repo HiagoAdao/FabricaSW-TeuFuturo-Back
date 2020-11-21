@@ -46,12 +46,9 @@ class TurmaDAO(DAOBase):
                     Turma,
                     Professor
                 )
-                .join(Turma,
-                      on=(Turma.id == TurmaProfessor.turma))
+                .join(Turma)
                 .switch(TurmaProfessor)
-                .join(Professor,
-                      on=(Professor.id ==
-                          TurmaProfessor.professor))
+                .join(Professor)
                 .where((Turma.id == turma_id))
             )
             return list(map(lambda turma: turma.to_dict(), query))

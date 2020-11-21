@@ -1,4 +1,4 @@
-from peewee import Model, TextField, ForeignKeyField
+from peewee import Model, TextField, ForeignKeyField, BooleanField
 from .aluno import Aluno
 from .atividade import Atividade
 
@@ -13,9 +13,13 @@ class AtividadeAluno(Model):
         column_name="ATIVIDADE_ID",
     )
     resolucao = TextField(column_name="RESOLUCAO")
+    ind_aprovacao = BooleanField(column_name="IND_APROVACAO", default=False)
 
     def to_dict(self):
-        return dict(resolucao=self.resolucao)
+        return dict(
+            aluno=self.aluno.to_dict(),
+            atividade=self.atividade.to_dict(),
+        )
 
     @staticmethod
     def from_dict(item_dict: dict):

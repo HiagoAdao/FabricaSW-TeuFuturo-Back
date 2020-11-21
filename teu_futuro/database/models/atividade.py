@@ -6,7 +6,7 @@ class Atividade(Model):
     id = AutoField()
     nome = TextField(column_name="NOME")
     descricao = TextField(column_name="DESCRICAO")
-    peso = DecimalField(column_name="PESO")
+    peso = DecimalField(column_name="PESO", default=0.0)
     turma = ForeignKeyField(
         Turma,
         column_name="TURMA_ID",

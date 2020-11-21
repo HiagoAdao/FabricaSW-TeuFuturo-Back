@@ -42,6 +42,7 @@ create table ATIVIDADE_ALUNO
     ALUNO_ID int unsigned not null,
     ATIVIDADE_ID int unsigned not null,
     RESOLUCAO text not null,
+    IND_APROVACAO tinyint not null,
     constraint FK_ATIVIDADE_ALUNO_ALUNO
         foreign key (ALUNO_ID) references ALUNO(ID),
     constraint FK_ATIVIDADE_ALUNO_ATIVIDADE

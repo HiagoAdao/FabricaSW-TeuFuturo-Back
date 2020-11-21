@@ -40,6 +40,29 @@ class AtividadeDAO(DAOBase):
             raise AtividadeDAOException(
                 f"Erro em AtividadeDAO.obter_todos: {e}")
 
+    def obter_atividades_aprovadas(self):
+        try:
+            query = (
+                AtividadeAluno
+                .select(
+                    Aluno,
+                    Atividade
+                )
+                .join(Aluno)
+                .switch(AtividadeAluno)
+                .join(Atividade)
+                .where((AtividadeAluno.ind_aprovacao == True))
+                .where((Aluno.inativo != False))
+            )
+            results = list(map(
+                lambda atividade: atividade.to_dict(),
+                query
+            ))
+            return results
+        except BaseException as e:
+            raise AtividadeDAOException(
+                f"Erro em AtividadeDAO.obter_atividades_aprovadas: {e}")
+
     def salvar(self, dados_atividade):
         with self.db.atomic() as transaction:
             try:

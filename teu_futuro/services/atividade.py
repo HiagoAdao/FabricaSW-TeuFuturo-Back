@@ -25,3 +25,7 @@ class AtividadeService:
         resolucao_atividade["atividade"] = atividade_id
         self.dao.salvar_atividade_aluno(resolucao_atividade)
         return "Atividade entregue com sucesso"
+
+    def obter_atividades_aprovadas(self):
+        atividades_aprovadas = self.dao.obter_atividades_aprovadas()
+        return atividades_aprovadas
