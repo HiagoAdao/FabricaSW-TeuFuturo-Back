@@ -6,23 +6,29 @@ from ..schemas.turma import TurmaSchema
 class TurmaController:
     @staticmethod
     def obter_todas_turmas():
-        turma_service, turma_schema = TurmaService(), TurmaSchema()
-        turmas = turma_service.obter_turmas()
-        resp = [turma_schema.load(turma)
-                for turma in turmas]
-        return Responses.success(resp)
+        try:
+            turma_service, turma_schema = TurmaService(), TurmaSchema()
+            turmas = turma_service.obter_turmas()
+            resp = [turma_schema.load(turma)
+                    for turma in turmas]
+            return Responses.success(resp)
+        except BaseException as err:
+            return Responses.bad_request(err)
 
     @staticmethod
     def obter_turma(turma_id):
-        turma_service, turma_schema = TurmaService(), TurmaSchema()
-        turma = turma_service.obter_turma(turma_id)
-        resp = turma_schema.load(turma)
-        return Responses.success(resp)
+        try:
+            turma_service, turma_schema = TurmaService(), TurmaSchema()
+            turma = turma_service.obter_turma(turma_id)
+            resp = turma_schema.load(turma)
+            return Responses.success(resp)
+        except BaseException as err:
+            return Responses.bad_request(err)
 
     @staticmethod
     def criar_turma(request_body):
-        turma_service, turma_schema = TurmaService(), TurmaSchema()
         try:
+            turma_service, turma_schema = TurmaService(), TurmaSchema()
             dados_turma = turma_schema.dump(request_body)
 
             turma_id = turma_service.criar_turma(dados_turma)

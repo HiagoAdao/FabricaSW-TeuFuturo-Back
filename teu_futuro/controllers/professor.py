@@ -6,9 +6,12 @@ from teu_futuro.services.professor import ProfessorService
 class ProfessorController:
     @staticmethod
     def obter_todos_professores():
-        professor_service = ProfessorService()
-        professor_schema = ProfessorSchema()
-        professores = professor_service.obter_professores()
-        resp = [professor_schema.load(professor)
-                for professor in professores]
-        return Responses.success(resp)
+        try:
+            professor_service = ProfessorService()
+            professor_schema = ProfessorSchema()
+            professores = professor_service.obter_professores()
+            resp = [professor_schema.load(professor)
+                    for professor in professores]
+            return Responses.success(resp)
+        except BaseException as err:
+            return Responses.bad_request(err)
