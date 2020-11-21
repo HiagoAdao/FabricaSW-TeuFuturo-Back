@@ -3,6 +3,7 @@ from .base import DAOBase
 from ..models.ranking_gamificacao import RankingGamificacao
 from ..models.turma import Turma
 from ..models.aluno import Aluno
+from datetime import datetime
 
 
 class RankingGamificacaoDAOException(BaseException):
@@ -47,12 +48,22 @@ class RankingGamificacaoDAO(DAOBase):
     def salvar(self, dados_ranking):
         with self.db.atomic() as transaction:
             try:
-                query = (
+                query_update_ranking = (
                     RankingGamificacao
                     .insert(**dados_ranking)
                     .on_conflict('replace')
                 )
-                query.execute()
+                query_update_ranking.execute()
+
+                nova_data_atualizacao = datetime.now()
+                query_update_data_atualizacao = (
+                    Turma
+                    .update(
+                        data_atualizacao_ranking=nova_data_atualizacao
+                    )
+                    .where((Turma.id == dados_ranking["turma"]))
+                )
+                query_update_data_atualizacao.execute()
 
                 transaction.commit()
             except BaseException as e:

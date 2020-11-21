@@ -8,3 +8,4 @@ class TurmaSchema(Schema):
     professores = fields.Nested(ProfessorSchema, many=True, allow_none=False)
     data_inicio = fields.String(allow_none=False)
     data_fim = fields.String(allow_none=False)
+    data_atualizacao_ranking = fields.String(allow_none=True)

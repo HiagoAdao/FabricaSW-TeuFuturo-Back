@@ -18,7 +18,8 @@ create table TURMA
     ID int unsigned auto_increment primary key,
     NOME varchar(50) not null,
     DATA_INICIO datetime not null,
-    DATA_FIM datetime not null
+    DATA_FIM datetime not null,
+    DATA_ATUALIZACAO_RANKING datetime null
 );
 
 create table TURMA_PROFESSOR

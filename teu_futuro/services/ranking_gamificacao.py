@@ -11,16 +11,22 @@ class RankingGamificacaoService:
         if not ranking_completo:
             return []
 
-        aluno = next(filter(
-            lambda rank: rank["aluno"]["id"] == aluno_id,
-            ranking_completo
-        ), None)
-
         classificacao_ranking = [
             {"posicao": posicao + 1, **dados_aluno}
             for posicao, dados_aluno in enumerate(ranking_completo[:10])
         ]
-        if aluno not in classificacao_ranking:
+
+        aluno_in_classificacao_ranking = bool(
+            list(filter(
+                lambda a: a["aluno"]["id"] == aluno_id,
+                classificacao_ranking
+            ))
+        )
+        if not aluno_in_classificacao_ranking:
+            aluno = next(filter(
+                lambda rank: rank["aluno"]["id"] == aluno_id,
+                ranking_completo
+            ), None)
             posicao_aluno = ranking_completo.index(aluno) + 1
             classificacao_ranking.append({"posicao": posicao_aluno, **aluno})
 
