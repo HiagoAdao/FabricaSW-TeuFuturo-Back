@@ -19,13 +19,13 @@ class AlunoService:
 
         novo_aluno = self.dao.salvar(dados_aluno)
         return (
-            f"{novo_aluno['nome']} {novo_aluno['sobrenome']} "
+            f"Aluno '{novo_aluno['nome']} {novo_aluno['sobrenome']}' "
             f"adicionado na turma {turma_id} com sucesso"
         )
 
     def inativar_aluno(self, aluno_id):
         aluno = self.dao.inativar(aluno_id)
         return (
-            f"{aluno['nome']} {aluno['sobrenome']} "
+            f"Aluno '{aluno['nome']} {aluno['sobrenome']}' "
             "inativado com sucesso"
         )
