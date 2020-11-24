@@ -22,7 +22,7 @@ class RankingGamificacaoService:
                 classificacao_ranking
             ))
         )
-        if not aluno_in_classificacao_ranking:
+        if aluno_email and not aluno_in_classificacao_ranking:
             aluno = next(filter(
                 lambda rank: rank["aluno"]["email"] == aluno_email,
                 ranking_completo
