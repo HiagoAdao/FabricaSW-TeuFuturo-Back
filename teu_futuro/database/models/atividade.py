@@ -18,7 +18,7 @@ class Atividade(Model):
             id=self.id,
             nome=self.nome,
             descricao=self.descricao,
-            peso=self.peso
+            peso=float(self.peso)
         )
 
     @staticmethod

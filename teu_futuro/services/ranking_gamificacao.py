@@ -5,7 +5,7 @@ class RankingGamificacaoService:
     def __init__(self):
         self.dao = RankingGamificacaoDAO()
 
-    def obter_ranking_gamificacao(self, turma_id, aluno_id):
+    def obter_ranking_gamificacao(self, turma_id, aluno_email):
         ranking_completo = self.dao.obter_todos(turma_id)
 
         if not ranking_completo:
@@ -18,13 +18,13 @@ class RankingGamificacaoService:
 
         aluno_in_classificacao_ranking = bool(
             list(filter(
-                lambda a: a["aluno"]["id"] == aluno_id,
+                lambda a: a["aluno"]["email"] == aluno_email,
                 classificacao_ranking
             ))
         )
         if not aluno_in_classificacao_ranking:
             aluno = next(filter(
-                lambda rank: rank["aluno"]["id"] == aluno_id,
+                lambda rank: rank["aluno"]["email"] == aluno_email,
                 ranking_completo
             ), None)
             posicao_aluno = ranking_completo.index(aluno) + 1

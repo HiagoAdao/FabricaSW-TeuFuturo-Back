@@ -6,13 +6,13 @@ from teu_futuro.schemas.ranking_gamificacao import RankingGamificacaoSchema
 
 class RankingGamificacaoController:
     @staticmethod
-    def obter_ranking(turma_id, aluno_id):
+    def obter_ranking(turma_id, aluno_email):
         try:
             gamificacao_service = RankingGamificacaoService()
             gamificacao_schema = RankingGamificacaoSchema()
             ranking_alunos = gamificacao_service.obter_ranking_gamificacao(
                 turma_id,
-                int(aluno_id)
+                aluno_email
             )
             resp = [gamificacao_schema.load(ranking_aluno)
                     for ranking_aluno in ranking_alunos]

@@ -107,7 +107,7 @@ def ranking_gamificacao_route(turma_id):
     request_methods_actions = {
         "GET": lambda turma_id: RankingGamificacaoController.obter_ranking(
             turma_id,
-            request.args.get("aluno_id")
+            request.args.get("aluno_email")
         ),
         "POST": lambda turma_id:
             RankingGamificacaoController.atualizar_ranking(turma_id)
