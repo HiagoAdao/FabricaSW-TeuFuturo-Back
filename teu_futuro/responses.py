@@ -26,6 +26,11 @@ class Responses:
         return make_response(response, 400)
 
     @staticmethod
+    def unauthorized(message):
+        response = Responses.__make_error(message)
+        return make_response(response, 401)
+
+    @staticmethod
     def server_error(message):
         response = Responses.__make_error(message)
         return make_response(response, 500)

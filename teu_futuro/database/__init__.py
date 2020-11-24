@@ -7,6 +7,7 @@ from .daos.atividade import AtividadeDAO
 from .daos.professor import ProfessorDAO
 from .daos.turma import TurmaDAO
 from .daos.ranking_gamificacao import RankingGamificacaoDAO
+from .daos.usuario import UsuarioDAO
 
 
 __all__ = [
@@ -18,5 +19,6 @@ __all__ = [
     "AtividadeDAO",
     "ProfessorDAO",
     "TurmaDAO",
-    "RankingGamificacaoDAO"
+    "RankingGamificacaoDAO",
+    "UsuarioDAO"
 ]
