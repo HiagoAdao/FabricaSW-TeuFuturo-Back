@@ -32,10 +32,7 @@ class AuthService:
             current_app.config["SECRET_KEY"]
         )
 
-        return dict(
-            message="Usuário autenticado com sucesso!",
-            token=token.decode("UTF-8")
-        )
+        return token.decode("UTF-8")
 
     def criar_usuario_com_permissoes(self, dados_usuario):
         perfil = self.dao.obter_perfil_por_nome(dados_usuario["perfil"])
