@@ -16,7 +16,9 @@ app = ConfigurationManager.inicializar()
 # =============== GETs ===============
 @app.route("/")
 def health():
-    return f"API rodando em {app.config["FLASK_ENV"]}."
+    from teu_futuro import Responses
+    from os import environ
+    return Responses.success(f"API rodando no ambiente '{environ.get('FLASK_ENV')}'.")
 
 
 @app.route("/turmas")

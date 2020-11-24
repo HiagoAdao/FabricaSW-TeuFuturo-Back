@@ -7,6 +7,7 @@ from teu_futuro.controllers.ranking_gamificacao import (
     RankingGamificacaoController)
 from teu_futuro.controllers.auth import AuthController
 from teu_futuro.database import ConfiguradorDB
+from .responses import Responses
 
 
 __all__ = [
@@ -17,5 +18,6 @@ __all__ = [
     "AtividadeController",
     "DominiosController",
     "RankingGamificacaoController",
-    "AuthController"
+    "AuthController",
+    "Responses"
 ]
