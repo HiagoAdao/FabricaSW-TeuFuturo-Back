@@ -10,6 +10,9 @@ flake8:
 install:
 	-@pip3 install -r requirements.txt
 
+start:
+	-@export FLASK_ENV=development && flask run
+
 db-start:
 	-@docker-compose up
 
