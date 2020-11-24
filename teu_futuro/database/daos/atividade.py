@@ -51,8 +51,8 @@ class AtividadeDAO(DAOBase):
                 .join(Aluno)
                 .switch(AtividadeAluno)
                 .join(Atividade)
-                .where((AtividadeAluno.ind_aprovacao == True))
-                .where((Aluno.inativo != False))
+                .where((AtividadeAluno.ind_aprovacao is True))
+                .where((Aluno.inativo is False))
             )
             results = list(map(
                 lambda atividade: atividade.to_dict(),

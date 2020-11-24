@@ -15,7 +15,7 @@ class AlunoController:
 
     @staticmethod
     def obter_todos_alunos(turma_id):
-        try:    
+        try:
             aluno_service, aluno_schema = AlunoService(), AlunoSchema()
             alunos = aluno_service.obter_alunos_por_turma(turma_id)
             resp = [aluno_schema.load(aluno) for aluno in alunos]

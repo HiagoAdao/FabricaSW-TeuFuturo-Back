@@ -1,7 +1,6 @@
-from peewee import Model, AutoField, ForeignKeyField, DecimalField
+from peewee import Model, ForeignKeyField, DecimalField
 from .turma import Turma
 from .aluno import Aluno
-from .atividade import Atividade
 
 
 class RankingGamificacao(Model):

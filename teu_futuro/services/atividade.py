@@ -17,7 +17,7 @@ class AtividadeService:
             f"adicionada na turma {turma_id} com sucesso"
         )
 
-    def adicionar_atividade_aluno(self, 
+    def adicionar_atividade_aluno(self,
                                   aluno_id,
                                   atividade_id,
                                   resolucao_atividade):
