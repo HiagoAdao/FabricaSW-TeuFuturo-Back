@@ -17,7 +17,8 @@ app = ConfigurationManager.inicializar()
 @app.route("/turmas")
 @AuthController.token_required
 def get_all_turmas():
-    return TurmaController.obter_todas_turmas()
+    return TurmaController.obter_todas_turmas(
+        request.args.get("professor_email"))
 
 
 @app.route("/turma/<int:turma_id>")
@@ -68,6 +69,12 @@ def get_all_atividades(turma_id):
 @AuthController.token_required
 def put_inativar_aluno(aluno_id):
     return AlunoController.inativar_aluno(aluno_id)
+
+@app.route(
+    "/aluno/<int:aluno_id>/atividade/<int:atividade_id>/aprovar", methods=["PUT"])
+@AuthController.token_required
+def put_aprovar_atividade_aluno(aluno_id, atividade_id):
+    return AtividadeController.aprovar_atividade_aluno(aluno_id, atividade_id)
 
 
 # =============== POSTs ===============

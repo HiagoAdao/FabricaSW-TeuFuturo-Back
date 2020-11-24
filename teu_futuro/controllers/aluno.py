@@ -21,7 +21,7 @@ class AlunoController:
             resp = [aluno_schema.load(aluno) for aluno in alunos]
             return Responses.success(resp)
         except BaseException as err:
-            return Responses.bad_request(err)
+            return Responses.bad_request(str(err))
 
     @staticmethod
     def cadastrar_aluno(turma_id, request_body):
@@ -32,4 +32,4 @@ class AlunoController:
                 turma_id, dados_aluno)
             return Responses.created(resp)
         except BaseException as err:
-            return Responses.bad_request(err)
+            return Responses.bad_request(str(err))

@@ -14,4 +14,4 @@ class ProfessorController:
                     for professor in professores]
             return Responses.success(resp)
         except BaseException as err:
-            return Responses.bad_request(err)
+            return Responses.bad_request(str(err))

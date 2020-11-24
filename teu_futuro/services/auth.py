@@ -14,7 +14,11 @@ class AuthService:
         if not permissoes_usuario:
             raise Exception("Usuário inexistente")
 
-        return permissoes_usuario
+        turma_id = None
+        if permissoes_usuario["perfil"]["nome"] == "aluno":
+            turma_id = self.dao.obter_aluno_por_email(email_usuario)
+
+        return { **permissoes_usuario, "turma_id": turma_id }
 
     def verfica_acesso_usuario(self, permissoes_usuario, senha_usuario):
         is_valid = check_password_hash(
@@ -27,6 +31,7 @@ class AuthService:
         token = encode_token(
             dict(
                 usuario=permissoes_usuario["email"],
+                turma_id=permissoes_usuario.get("turma_id"),
                 perfil=permissoes_usuario["perfil"]
             ),
             current_app.config["SECRET_KEY"]

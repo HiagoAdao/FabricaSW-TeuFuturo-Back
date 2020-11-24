@@ -65,6 +65,7 @@ VALUES (
             "/turma/<int:turma_id>",
             "/turma/<int:turma_id>/alunos",
             "/turma/<int:turma_id>/atividades",
+            "/aluno/<int:aluno_id>/atividade/<int:atividade_id>/aprovar",
             "/turma/<int:turma_id>/ranking-gamificacao"
         ],
         "app": [
@@ -91,7 +92,6 @@ VALUES (
         ],
         "app": [
             "/turma/{id}",
-            "/alunos",
             "/atividades",
             "/ranking"
         ]

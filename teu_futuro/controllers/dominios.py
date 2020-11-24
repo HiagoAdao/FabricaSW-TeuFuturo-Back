@@ -16,7 +16,7 @@ class DominiosController:
                     for escola in escolas]
             return Responses.success(resp)
         except BaseException as err:
-            return Responses.bad_request(err)
+            return Responses.bad_request(str(err))
 
     @staticmethod
     def obter_todos_sponsors():
@@ -28,7 +28,7 @@ class DominiosController:
                     for sponsor in sponsors]
             return Responses.success(resp)
         except BaseException as err:
-            return Responses.bad_request(err)
+            return Responses.bad_request(str(err))
 
     @staticmethod
     def obter_todos_anos_ensino_medio():
@@ -40,4 +40,4 @@ class DominiosController:
                     for ano_em in anos_ensino_medio]
             return Responses.success(resp)
         except BaseException as err:
-            return Responses.bad_request(err)
+            return Responses.bad_request(str(err))

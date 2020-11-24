@@ -18,7 +18,7 @@ class RankingGamificacaoController:
                     for ranking_aluno in ranking_alunos]
             return Responses.success(resp)
         except BaseException as err:
-            return Responses.bad_request(err)
+            return Responses.bad_request(str(err))
 
     @staticmethod
     def atualizar_ranking(turma_id):
@@ -32,4 +32,4 @@ class RankingGamificacaoController:
             )
             return Responses.success(resp)
         except BaseException as err:
-            return Responses.bad_request(err)
+            return Responses.bad_request(str(err))

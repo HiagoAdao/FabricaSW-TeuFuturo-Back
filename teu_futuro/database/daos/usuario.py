@@ -1,6 +1,7 @@
 from ..factory.db_injection import injetar_db
 from .base import DAOBase
 from ..models.usuario import Usuario
+from ..models.aluno import Aluno
 from ..models.perfil import Perfil
 
 
@@ -14,7 +15,7 @@ class UsuarioDAO(DAOBase):
     def __init__(self, instancia_db=None):
         self.db = instancia_db
         if self.db is not None:
-            self.db.bind([Usuario, Perfil])
+            self.db.bind([Aluno, Usuario, Perfil])
 
     def obter_usuario_por_email(self, email_usuario):
         try:
@@ -31,6 +32,14 @@ class UsuarioDAO(DAOBase):
         except BaseException as e:
             raise UsuarioDAOException(
                 f"Error em UsuarioDAO.obter_perfil_por_nome: {e}")
+
+    def obter_aluno_por_email(self, email_aluno):
+        try:
+            aluno = Aluno.get_or_none(email=email_aluno)
+            return aluno.turma.id if aluno and aluno.turma else None
+        except BaseException as e:
+            raise UsuarioDAOException(
+                f"Error em UsuarioDAO.obter_aluno_por_email: {e}")
 
     def obter_todos(self):
         pass

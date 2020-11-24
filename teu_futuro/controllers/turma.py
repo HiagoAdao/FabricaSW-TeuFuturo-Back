@@ -5,15 +5,15 @@ from ..schemas.turma import TurmaSchema
 
 class TurmaController:
     @staticmethod
-    def obter_todas_turmas():
+    def obter_todas_turmas(email_professor):
         try:
             turma_service, turma_schema = TurmaService(), TurmaSchema()
-            turmas = turma_service.obter_turmas()
+            turmas = turma_service.obter_turmas(email_professor)
             resp = [turma_schema.load(turma)
                     for turma in turmas]
             return Responses.success(resp)
         except BaseException as err:
-            return Responses.bad_request(err)
+            return Responses.bad_request(str(err))
 
     @staticmethod
     def obter_turma(turma_id):
@@ -23,7 +23,7 @@ class TurmaController:
             resp = turma_schema.load(turma)
             return Responses.success(resp)
         except BaseException as err:
-            return Responses.bad_request(err)
+            return Responses.bad_request(str(err))
 
     @staticmethod
     def criar_turma(request_body):
@@ -37,4 +37,4 @@ class TurmaController:
 
             return Responses.created(f"Turma {turma_id} criada com sucesso")
         except BaseException as err:
-            return Responses.bad_request(err)
+            return Responses.bad_request(str(err))

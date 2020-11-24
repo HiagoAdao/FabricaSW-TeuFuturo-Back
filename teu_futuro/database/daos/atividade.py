@@ -91,3 +91,24 @@ class AtividadeDAO(DAOBase):
                     transaction.rollback()
                 raise AtividadeDAOException(
                     f"Erro em AtividadeDAO.salvar_atividade_aluno: {e}")
+
+    def marcar_atividade_como_aprovada(self, aluno_id, atividade_id):
+        with self.db.atomic() as transaction:
+            try:
+                query = (
+                    AtividadeAluno
+                    .update(
+                        ind_aprovacao=True
+                    )
+                    .where((AtividadeAluno.atividade == atividade_id))
+                    .where((AtividadeAluno.aluno == aluno_id))
+                )
+
+                query.execute()
+
+                transaction.commit()
+            except BaseException as e:
+                if transaction is not None:
+                    transaction.rollback()
+                raise AtividadeDAOException(
+                    f"Erro em AtividadeDAO.salvar_atividade_aluno: {e}")

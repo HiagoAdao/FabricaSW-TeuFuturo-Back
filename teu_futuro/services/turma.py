@@ -22,9 +22,13 @@ class TurmaService:
                 turma_existente["professores"].append(item["professor"])
         return turmas
 
-    def obter_turmas(self):
-        turmas_banco = self.dao.obter_todos()
-        turmas = self._obtem_professores_turma(turmas_banco)
+    def obter_turmas(self, email_professor):
+        if not email_professor:
+            turmas_banco = self.dao.obter_todos()
+            turmas = self._obtem_professores_turma(turmas_banco)
+            return turmas
+        turmas_professor = self.dao.obter_turma_por_professor(email_professor)
+        turmas = self._obtem_professores_turma(turmas_professor)
         return turmas
 
     def obter_turma(self, turma_id):

@@ -26,7 +26,7 @@ class AuthController:
 
             return Responses.success(resp)
         except BaseException as err:
-            return Responses.unauthorized(err)
+            return Responses.unauthorized(str(err))
 
     @staticmethod
     def criar_novo_usuario(request_body):
@@ -38,7 +38,7 @@ class AuthController:
 
             return Responses.created(resp)
         except BaseException as err:
-            return Responses.bad_request(err)
+            return Responses.bad_request(str(err))
 
     @staticmethod
     def token_required(func):

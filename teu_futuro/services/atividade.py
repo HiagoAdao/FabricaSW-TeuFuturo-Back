@@ -29,3 +29,11 @@ class AtividadeService:
     def obter_atividades_aprovadas(self):
         atividades_aprovadas = self.dao.obter_atividades_aprovadas()
         return atividades_aprovadas
+
+    def aprovar_atividade_aluno(self, aluno_id, atividade_id):
+        dados_atividade = dict(
+            aluno=aluno_id,
+            atividade=atividade_id
+        )
+        self.dao.marcar_atividade_como_aprovada(aluno_id, atividade_id)
+        return "Atividade aprovada com sucesso"

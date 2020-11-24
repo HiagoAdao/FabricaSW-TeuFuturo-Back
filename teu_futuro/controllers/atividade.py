@@ -30,7 +30,7 @@ class AtividadeController:
             )
             return Responses.created(resp)
         except BaseException as err:
-            return Responses.bad_request(err)
+            return Responses.bad_request(str(err))
 
     @staticmethod
     def salvar_atividade_aluno(aluno_id, atividade_id, request_body):
@@ -45,4 +45,16 @@ class AtividadeController:
             )
             return Responses.created(resp)
         except BaseException as err:
-            return Responses.bad_request(err)
+            return Responses.bad_request(str(err))
+
+    @staticmethod
+    def aprovar_atividade_aluno(aluno_id, atividade_id):
+        try:
+            atividade_service = AtividadeService()
+            resp = atividade_service.aprovar_atividade_aluno(
+                aluno_id,
+                atividade_id
+            )
+            return Responses.created(resp)
+        except BaseException as err:
+            return Responses.bad_request(str(err))

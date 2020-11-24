@@ -55,6 +55,22 @@ class TurmaDAO(DAOBase):
         except BaseException as e:
             raise TurmaDAOException(f"Erro em TurmaDAO.obter: {e}")
 
+    def obter_turma_por_professor(self, email_professor):
+        try:
+            query = (
+                TurmaProfessor.select(
+                    Turma,
+                    Professor
+                )
+                .join(Turma)
+                .switch(TurmaProfessor)
+                .join(Professor)
+                .where((Professor.email == email_professor))
+            )
+            return list(map(lambda turma: turma.to_dict(), query))
+        except BaseException as e:
+            raise TurmaDAOException(f"Erro em TurmaDAO.obter: {e}")
+
     def salvar(self, dados_turma):
         with self.db.atomic() as transaction:
             try:
