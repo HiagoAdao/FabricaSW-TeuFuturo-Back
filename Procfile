@@ -1,1 +1,1 @@
-web: gunicorn app:app
+web: export FLASK_ENV=production && python3 -m flask run 
