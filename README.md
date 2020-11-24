@@ -57,7 +57,7 @@ make start
 
 <!-- DEPLOYMENT -->
 ## Deployment
-Todo **_commit_** ou **_pull request_** feito na branch `master` irá gerar um deploy automático pelo serviço do - [Heroku](https://www.heroku.com/) que pode ser econtrado na url do projeto de produção.
+Todo **_commit_** ou **_pull request_** feito na branch `master` irá gerar um deploy automático pelo serviço do [Heroku](https://www.heroku.com/) que pode ser econtrado na url do projeto de produção.
 
 
 <!-- CONTACT -->
