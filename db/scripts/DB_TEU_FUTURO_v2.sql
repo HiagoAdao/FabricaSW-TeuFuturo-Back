@@ -13,6 +13,11 @@ create table PROFESSOR
     EMAIL varchar(50) not null
 );
 
+INSERT INTO PROFESSOR (ID, NOME, SOBRENOME, EMAIL) VALUES (1, 'Fahad', 'Kalil', 'fahad.kalil@teufuturo.imed');
+INSERT INTO PROFESSOR (ID, NOME, SOBRENOME, EMAIL) VALUES (2, 'Amilton', 'Martins', 'amilton.martins@teufuturo.imed');
+INSERT INTO PROFESSOR (ID, NOME, SOBRENOME, EMAIL) VALUES (3, 'Fernando', 'Posser', 'fernando.posser@teufuturo.imed');
+INSERT INTO PROFESSOR (ID, NOME, SOBRENOME, EMAIL) VALUES (4, 'Marcos', 'Santos', 'marcos.santos@teufuturo.imed');
+
 create table TURMA
 (
     ID int unsigned auto_increment primary key,
