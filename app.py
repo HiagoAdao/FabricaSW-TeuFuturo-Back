@@ -14,6 +14,11 @@ app = ConfigurationManager.inicializar()
 
 
 # =============== GETs ===============
+@app.route("/")
+def health():
+    return f"API rodando em {app.config["FLASK_ENV"]}."
+
+
 @app.route("/turmas")
 @AuthController.token_required
 def get_all_turmas():
