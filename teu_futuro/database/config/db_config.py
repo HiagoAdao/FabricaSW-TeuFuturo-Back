@@ -11,7 +11,7 @@ class ConfiguradorDB:
 
     @staticmethod
     def inicializar(config):
-        instancia = getattr(config, "INSTANCE_DB", "rootdb")
+        instancia = getattr(config, "INSTANCE_DB", "")
         usuario = getattr(config, "USER_DB", "root")
         senha = getattr(config, "PASSWORD_DB", "root")
         host = getattr(config, "HOST_DB", "127.0.0.1")

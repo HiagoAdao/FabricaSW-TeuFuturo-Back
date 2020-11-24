@@ -28,7 +28,14 @@ class DevelopmentConfig(ConfigBase):
 
 
 class ProductionConfig(ConfigBase):
-    pass
+    SECRET_KEY = "".join(random.choice(_RANDOM_STR)
+                         for _ in range(12))
+
+    INSTANCE_DB = "bk4mj64pfeb0k8ao"
+    USER_DB = "qprhy4u9ru81bkkl"
+    PASSWORD_DB = "dy2uyca8fjn9whj2"
+    HOST_DB = "r1bsyfx4gbowdsis.cbetxkdyhwsb.us-east-1.rds.amazonaws.com"
+    PORT_DB = "3306"
 
 
 class ConfigurationManager:
