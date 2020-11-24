@@ -56,7 +56,8 @@ class AuthController:
 
                 usuario = decode_token(
                     current_token,
-                    current_app.config["SECRET_KEY"]
+                    current_app.config["SECRET_KEY"],
+                    verify=False
                 )
 
                 permissoes = usuario["perfil"]["permissoes"]
